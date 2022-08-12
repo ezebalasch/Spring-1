@@ -4,6 +4,7 @@
 package com.egg.biblioteca.servicios;
 
 import com.egg.biblioteca.entidades.Editorial;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.EditorialRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class EditorialServicio {
     @Autowired EditorialRepositorio editorialRepositorio;
     
     @Transactional
-    public void crearEditorial(String nombre){
+    public void crearEditorial(String nombre) throws MiException{
+        validar(nombre);
         
         Editorial editorial = new Editorial();
         
@@ -31,6 +33,12 @@ public class EditorialServicio {
         
         editorialRepositorio.save(editorial);
     }
+    
+    private void validar(String nombre) throws MiException {
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El nombre de la editorial no puede ser nulo o estar vacío");
+        }
+    }    
     
     public List<Editorial> listarEditorial(){
         

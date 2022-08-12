@@ -6,6 +6,7 @@ package com.egg.biblioteca.servicios;
 import com.egg.biblioteca.entidades.Autor;
 import com.egg.biblioteca.entidades.Editorial;
 import com.egg.biblioteca.entidades.Libro;
+import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.AutorRepositorio;
 import com.egg.biblioteca.repositorios.EditorialRepositorio;
 import com.egg.biblioteca.repositorios.LibroRepositorio;
@@ -32,13 +33,14 @@ public class LibroServicio {
     private EditorialRepositorio editorialRepositorio;
             
     @Transactional
-    public void crearLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial){
+    public void crearLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
         
         Autor autor = autorRepositorio.findById(idAutor).get();
         Editorial editorial = editorialRepositorio.findById(idAutor).get();
         Libro libro = new Libro();
         
         libro.setIsbn(isbn);
+        validar(titulo);
         libro.setTitulo(titulo);
         libro.setEjemplares(ejemplares);
         libro.setAlta(new Date());
@@ -48,6 +50,12 @@ public class LibroServicio {
         
         libroRepositorio.save(libro);
     }
+
+    private void validar(String nombre) throws MiException {
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El titulo del libro no puede ser nulo o estar vacío");
+        }
+    }       
     
     //Lista los objetos de Libro
     public List<Libro> listarLibros(){
