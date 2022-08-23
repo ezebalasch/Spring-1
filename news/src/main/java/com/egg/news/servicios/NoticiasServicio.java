@@ -37,6 +37,7 @@ public class NoticiasServicio {
         noticias.setTitulo(titulo);
         noticias.setCuerpo(cuerpo);
         noticias.setUsuario(usuario);
+        noticias.setAlta(Boolean.TRUE);
         noticias.setFecha(Calendar.getInstance());
 
         noticiasRepositorio.save(noticias);
