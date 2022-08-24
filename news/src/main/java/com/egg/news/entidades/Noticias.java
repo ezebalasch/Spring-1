@@ -4,9 +4,11 @@
 package com.egg.news.entidades;
 
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,7 +36,8 @@ public class Noticias {
     
     private Boolean alta;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+ //   @JoinColumn(name="id", nullable=false)
     private Usuario usuario;
 
     public Noticias() {
@@ -87,6 +90,16 @@ public class Noticias {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "Noticias{" + "id=" + id + ", titulo=" + titulo + ", cuerpo=" + cuerpo + ", fecha=" + fecha + ", alta=" + alta + ", usuario=" + usuario + '}';
+    }
+
+   
+
+    
+
     
     
 }

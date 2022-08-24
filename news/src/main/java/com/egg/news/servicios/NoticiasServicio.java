@@ -33,7 +33,7 @@ public class NoticiasServicio {
         validar(titulo, cuerpo, idUsuario);
         Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
         Noticias noticias = new Noticias();
-
+        System.out.println(usuario.toString());
         noticias.setTitulo(titulo);
         noticias.setCuerpo(cuerpo);
         noticias.setUsuario(usuario);

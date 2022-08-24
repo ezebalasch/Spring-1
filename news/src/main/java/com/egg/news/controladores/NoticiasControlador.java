@@ -3,10 +3,11 @@
  */
 package com.egg.news.controladores;
 
+import com.egg.news.entidades.Usuario;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.egg.news.servicios.UsuarioServicio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,16 +26,25 @@ public class NoticiasControlador {
 
     @Autowired
     private NoticiasServicio noticiasServicio;
+    
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/registrar")
-    public String registrar() {
+    public String registrar(ModelMap modelo) {
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        
+        modelo.addAttribute("usuarios", usuarios); 
+        
         return "noticias_form.html";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String titulo, @RequestParam String id_usuario,
-            @RequestParam String cuerpo, ModelMap modelo) {
+    public String registro(@RequestParam(required=false) String titulo,
+            @RequestParam(required=false) String id_usuario,
+            @RequestParam(required=false) String cuerpo, ModelMap modelo) {
         try {
+            System.out.println(id_usuario);
             noticiasServicio.crearNoticias(titulo, cuerpo, id_usuario);
             modelo.put("éxito", "La noticia fue cargada correctamente");
         } catch (MiException ex) {

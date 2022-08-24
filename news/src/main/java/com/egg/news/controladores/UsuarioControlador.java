@@ -32,7 +32,8 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String apellido, ModelMap modelo) {
+    public String registro(@RequestParam(required=false) String nombre, @RequestParam(required=false)
+            String apellido, ModelMap modelo) {
 
         try {
             usuarioServicio.crearUsuario(nombre, apellido);

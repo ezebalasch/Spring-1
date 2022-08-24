@@ -59,6 +59,11 @@ public class Usuario {
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", alta=" + alta + '}';
+    }
     
     
 }
