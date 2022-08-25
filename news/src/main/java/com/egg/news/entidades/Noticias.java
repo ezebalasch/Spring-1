@@ -37,7 +37,7 @@ public class Noticias {
     private Boolean alta;
     
     @ManyToOne(cascade = CascadeType.ALL)
- //   @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="usuario", nullable=false)
     private Usuario usuario;
 
     public Noticias() {

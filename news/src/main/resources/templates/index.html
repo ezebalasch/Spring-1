@@ -22,9 +22,9 @@
                             Noticias
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/noticias/registrar">Crear Noticia</a></li>
+                            <li><a class="dropdown-item" th:href="@{/noticias/registrar}">Crear Noticia</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Ver Noticias</a></li>
+                            <li><a class="dropdown-item" href="">Ver Noticias</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -32,15 +32,15 @@
                             Usuarios
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/usuarios/registrar">Nuevo Usuario</a></li>
+                            <li><a class="dropdown-item" th:href="@{/usuarios/registrar}">Nuevo Usuario</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Ver Usuarios</a></li>
+                            <li><a class="dropdown-item" href="">Ver Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </nav>
-        
+
         <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
             <div class="card-body">
                 <h5 class="card-title">Error</h5>
@@ -54,12 +54,11 @@
                 <p class="card-text" th:text="${exito}"></p>
             </div>
         </div>
+        <div style="margin-left: 30%; margin-top: 2% ; margin-right: 30%; border-radius: 2%; background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding: 4%;">
+            <h1>Encontrá el listado de todas las noticias aquí</h1>
+            <button type="button" class="btn btn-primary" style="margin-left: 40%; margin-top: 5rem ; ">Ver listado</button>
 
-        <h1>Encontrá el listado de todas las noticias aquí</h1>
-        <button type="button" class="btn btn-primary" style="height:80px; width:100px; 
-                position:relative;
-                top:5%; 
-                left:20%;">Ver listado</button>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
