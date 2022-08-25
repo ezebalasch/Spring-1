@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" th:href="@{/}">EggNews</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" ></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -24,7 +24,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" th:href="@{/noticias/registrar}">Crear Noticia</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="">Ver Noticias</a></li>
+                            <li><a class="dropdown-item" th:href="@{/noticias/lista}">Ver Noticias</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" th:href="@{/usuarios/registrar}">Nuevo Usuario</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="">Ver Usuarios</a></li>
+                            <li><a class="dropdown-item" th:href="@{/usuarios/lista}">Ver Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -56,7 +56,9 @@
         </div>
         <div style="margin-left: 30%; margin-top: 2% ; margin-right: 30%; border-radius: 2%; background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding: 4%;">
             <h1>Encontrá el listado de todas las noticias aquí</h1>
-            <button type="button" class="btn btn-primary" style="margin-left: 40%; margin-top: 5rem ; ">Ver listado</button>
+            <a th:href="@{/usuarios/lista}">
+                <button type="button" class="btn btn-primary" style="margin-left: 40%; margin-top: 5rem ; ">Ver listado</button>
+            </a>
 
         </div>
 

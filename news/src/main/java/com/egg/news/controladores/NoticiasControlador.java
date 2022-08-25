@@ -3,6 +3,7 @@
  */
 package com.egg.news.controladores;
 
+import com.egg.news.entidades.Noticias;
 import com.egg.news.entidades.Usuario;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
@@ -26,31 +27,38 @@ public class NoticiasControlador {
 
     @Autowired
     private NoticiasServicio noticiasServicio;
-    
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) {
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-        
-        modelo.addAttribute("usuarios", usuarios); 
-        
+
+        modelo.addAttribute("usuarios", usuarios);
+
         return "noticias_form.html";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(required=false) String titulo,
-            @RequestParam(required=false) String id_usuario,
-            @RequestParam(required=false) String cuerpo, ModelMap modelo) {
+    public String registro(@RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String id_usuario,
+            @RequestParam(required = false) String cuerpo, ModelMap modelo) {
         try {
             System.out.println(id_usuario);
             noticiasServicio.crearNoticias(titulo, cuerpo, id_usuario);
             modelo.put("éxito", "La noticia fue cargada correctamente");
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
-        return "noticias_form.html";
+            return "noticias_form.html";
         }
         return "index.html";
+    }
+
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo) {
+        List<Noticias> noticias = noticiasServicio.listarNoticias();
+        modelo.addAttribute("noticias", noticias);
+        return "noticias_list.html";
     }
 }

@@ -3,10 +3,10 @@
  */
 package com.egg.news.controladores;
 
+import com.egg.news.entidades.Usuario;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.UsuarioServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,4 +46,10 @@ public class UsuarioControlador {
         return "index.html";
     }
 
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo){
+        List <Usuario> usuarios = usuarioServicio.listarUsuarios();
+        modelo.addAttribute("usuarios", usuarios);
+        return "usuario_list.html";
+    }
 }
