@@ -41,18 +41,19 @@
             </div>
         </nav>
 
+
         <div class="container text-center">
             <div style="padding: 2%" class="row justify-content-start">
                 <div class="col-4" >
-                    <a th:href="@{/}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <a th:href="@{/usuarios/lista}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                        </svg> Inicio
+                        </svg> Volver
                     </a>
                 </div>
                 <div class="col-4">
-                    <form th:action="@{/usuarios/registro}" method="POST">
+                    <form th:action="@{/usuarios/modificar/__${usuario.id}__}" method="POST">
                         <div style="border-radius: 2%; background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding: 5%;">
-                            <h1 class="h3 mb-3 fw-normal">Crear Usuario</h1>
+                            <h1 class="h3 mb-3 fw-normal">Editar Usuario</h1>
 
                             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
                                 <div class="card-body">
@@ -67,23 +68,25 @@
                                     <p class="card-text" th:text="${exito}"></p>
                                 </div>
                             </div>
+                            
+                            <input hidden th:value="${id}" name="id">
 
                             <div class="mb-3">
                                 <label for="disabledTextInput" class="form-label">Nombre</label>
-                                <input name="nombre" type="text" id="disabledTextInput" class="form-control" placeholder='Ej "Julian"'>
+                                <input th:value="${usuario.nombre}" name="nombre" type="text" id="disabledTextInput" class="form-control" placeholder='Ej "Julian"'>
                             </div>
                             <div class="mb-3">
                                 <label for="disabledTextInput" class="form-label">Apellido</label>
-                                <input name="apellido" type="text" id="disabledTextInput" class="form-control" placeholder='Ej "Alvarez"'>
+                                <input th:value="${usuario.apellido}" name="apellido" type="text" id="disabledTextInput" class="form-control" placeholder='Ej "Alvarez"'>
                             </div>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">Guardar</button>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">Guardar Cambios</button>
 
                         </div>  
                 </div>
                 </form>               
             </div>
 
-            <p class="mt-5 mb-3 text-muted">&copy; Ezequiel Balasch</p>
+                <p class="mt-5 mb-3 text-muted">&copy; Ezequiel Balasch</p>
 
 
 

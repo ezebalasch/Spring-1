@@ -68,6 +68,11 @@ public class NoticiasServicio {
             noticiasRepositorio.save(noticias);
         }
     }
+    
+    public Noticias getOne(String id){
+        return noticiasRepositorio.getOne(id);
+        
+    }
 
     private void validar(String titulo, String cuerpo, String idUsuario) throws MiException {
 

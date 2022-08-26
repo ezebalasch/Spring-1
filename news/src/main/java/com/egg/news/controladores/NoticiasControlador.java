@@ -9,10 +9,13 @@ import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
 import com.egg.news.servicios.UsuarioServicio;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,5 +63,26 @@ public class NoticiasControlador {
         List<Noticias> noticias = noticiasServicio.listarNoticias();
         modelo.addAttribute("noticias", noticias);
         return "noticias_list.html";
+    }
+
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo) {
+        modelo.put("noticia", noticiasServicio.getOne(id));
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        modelo.addAttribute("usuarios", usuarios);
+        return "noticias_modificar.html";
+    }
+
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, String titulo,
+            String id_usuario, String cuerpo, ModelMap modelo) {
+        try {
+            noticiasServicio.modificarNoticias(id, titulo, cuerpo, id_usuario);
+            return "redirect:../lista";
+        } catch (MiException ex) {
+            modelo.put("Error", ex.getMessage());
+            return "noticias_modificar.html";
+        }
+
     }
 }

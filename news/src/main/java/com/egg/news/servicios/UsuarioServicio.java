@@ -19,10 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsuarioServicio {
-    
+
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
-    
+
     @Transactional
     public void crearUsuario(String nombre, String apellido) throws MiException {
         validar(nombre, apellido);
@@ -30,20 +30,21 @@ public class UsuarioServicio {
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setAlta(Boolean.TRUE);
-        
+
         usuarioRepositorio.save(usuario);
     }
-    
+
     public List<Usuario> listarUsuarios() {
         List<Usuario> usuarios = new ArrayList();
         usuarios = usuarioRepositorio.findAll();
-        
+
         return usuarios;
     }
-    
+
     @Transactional
-    public void modificarUsuario(String id, String nombre, String apellido) {
+    public void modificarUsuario(String id, String nombre, String apellido) throws MiException {
         
+        validar(nombre, apellido);
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
@@ -53,7 +54,11 @@ public class UsuarioServicio {
         }
     }
     
-        private void validar(String nombre, String apellido) throws MiException {
+    public Usuario getOne(String Id){
+        return usuarioRepositorio.getOne(Id);
+    }
+
+    private void validar(String nombre, String apellido) throws MiException {
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("El nombre no puede estar vacío");
