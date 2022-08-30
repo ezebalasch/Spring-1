@@ -29,4 +29,14 @@ public class PortalControlador {
         modelo.addAttribute("noticias", noticias);
         return "index.html";
     }
+    
+    @GetMapping("/registrar")
+    public String registrar(){
+        return "registrar.html";
+    }
+    
+    @GetMapping("/login")
+    public String login(){
+        return "login.html";
+    }    
 }
