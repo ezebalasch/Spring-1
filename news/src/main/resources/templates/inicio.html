@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EggNews</title>
+        <link href="../statico/nav&Form.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Noticias
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/noticias/registrar}">Crear Noticia</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/noticias/lista}">Ver Noticias</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Usuarios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/usuarios/registrar}">Nuevo Usuario</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/usuarios/lista}">Ver Usuarios</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesion</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div
+            style="   background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding-top: 2%;">
+            <h1 style="text-align:center ;">Encontrá el listado de todas las noticias aquí</h1>
+
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58 1440 250">
+        <path fill="#E6E4E3" fill-opacity="2"
+              d="M0,128L12.6,138.7C25.3,149,51,171,76,181.3C101.1,192,126,192,152,192C176.8,192,202,192,227,181.3C252.6,171,278,149,303,138.7C328.4,128,354,128,379,149.3C404.2,171,429,213,455,245.3C480,277,505,299,531,272C555.8,245,581,171,606,170.7C631.6,171,657,245,682,234.7C707.4,224,733,128,758,85.3C783.2,43,808,53,834,101.3C858.9,149,884,235,909,234.7C934.7,235,960,149,985,117.3C1010.5,85,1036,107,1061,128C1086.3,149,1112,171,1137,154.7C1162.1,139,1187,85,1213,69.3C1237.9,53,1263,75,1288,117.3C1313.7,160,1339,224,1364,256C1389.5,288,1415,288,1427,288L1440,288L1440,0L1427.4,0C1414.7,0,1389,0,1364,0C1338.9,0,1314,0,1288,0C1263.2,0,1238,0,1213,0C1187.4,0,1162,0,1137,0C1111.6,0,1086,0,1061,0C1035.8,0,1011,0,985,0C960,0,935,0,909,0C884.2,0,859,0,834,0C808.4,0,783,0,758,0C732.6,0,707,0,682,0C656.8,0,632,0,606,0C581.1,0,556,0,531,0C505.3,0,480,0,455,0C429.5,0,404,0,379,0C353.7,0,328,0,303,0C277.9,0,253,0,227,0C202.1,0,177,0,152,0C126.3,0,101,0,76,0C50.5,0,25,0,13,0L0,0Z">
+        </path>
+        </svg>
+
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="20000">
+                    <div style="width: 18rem;margin-left: auto;margin-right: auto;">
+
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#FA4D56"
+                              d="M66.5,-17.7C75.2,5.2,63.7,38.5,39.7,56.4C15.6,74.2,-20.9,76.7,-42.4,60.5C-64,44.4,-70.5,9.7,-60.9,-14.4C-51.3,-38.4,-25.7,-51.8,1.6,-52.3C28.9,-52.9,57.8,-40.5,66.5,-17.7Z"
+                              transform="translate(100 100)" />
+                        <text x="70" y="110" fill="#FFFFFF">Desliza</text>
+                        </svg>
+
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+
+                    </div>
+                </div>
+                <div th:each="noticia  : ${noticias}" class="carousel-item" data-bs-interval="2000">
+                    <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto; margin-bottom: 5%;">
+                        <div class="card-body">
+                            <h5 th:text="${noticia.titulo}" class="card-title"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${noticia.usuario.nombre}"></h6>
+                            <p th:text="${noticia.cuerpo}" class="card-text"></p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

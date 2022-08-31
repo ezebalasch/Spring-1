@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,7 +39,7 @@ public class UsuarioRolServicio implements UserDetailsService{
         
         usuarioRol.setNombre(nombre);
         usuarioRol.setEmail(email);
-        usuarioRol.setPassword(password);
+        usuarioRol.setPassword(new BCryptPasswordEncoder().encode(password));
         usuarioRol.setRol(Rol.USER);
         
         usuarioRolepositorio.save(usuarioRol);
