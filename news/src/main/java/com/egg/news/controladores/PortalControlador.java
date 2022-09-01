@@ -4,13 +4,16 @@
 package com.egg.news.controladores;
 
 import com.egg.news.entidades.Noticias;
+import com.egg.news.entidades.UsuarioRol;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
 import com.egg.news.servicios.UsuarioRolServicio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,10 +69,19 @@ public class PortalControlador {
         return "login.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(ModelMap modelo) {
+    public String inicio(ModelMap modelo, HttpSession session) {
         List<Noticias> noticias = noticiasServicio.listarNoticias();
         modelo.addAttribute("noticias", noticias);
+        
+        UsuarioRol logueado = (UsuarioRol) session.getAttribute("usuariosession");
+        
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            
+            return  "redirect:/admin/dashboard";   
+        }
+        
         return "inicio.html";
     }
 }
