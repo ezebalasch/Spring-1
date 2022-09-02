@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -30,6 +31,9 @@ public class UsuarioRol {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    @OneToOne
+    private Imagen imagen;
+    
     public UsuarioRol() {
     }
 
@@ -53,6 +57,10 @@ public class UsuarioRol {
         return rol;
     }
 
+    public Imagen getImagen() {
+        return imagen;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -72,6 +80,12 @@ public class UsuarioRol {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+
+    
 
     
     
