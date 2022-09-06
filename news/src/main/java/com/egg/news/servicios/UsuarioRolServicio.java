@@ -109,6 +109,32 @@ public class UsuarioRolServicio implements UserDetailsService {
 
     }
 
+    public List<UsuarioRol> listarUsuarios() {
+
+        List<UsuarioRol> usuarios = new ArrayList();
+
+        usuarios = usuarioRolRepositorio.findAll();
+
+        return usuarios;
+    }
+
+    @Transactional
+    public void cambiarRol(String id){
+        Optional<UsuarioRol> respuesta = usuarioRolRepositorio.findById(id);
+        
+        if (respuesta.isPresent()) {
+            
+            UsuarioRol usuario = respuesta.get();
+            
+            if (usuario.getRol().equals(Rol.USER)) {
+                
+                usuario.setRol(Rol.ADMIN);
+            }else if (usuario.getRol().equals(Rol.ADMIN)) {
+                usuario.setRol(Rol.USER);
+            }
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -134,5 +160,4 @@ public class UsuarioRolServicio implements UserDetailsService {
         }
 
     }
-
 }
