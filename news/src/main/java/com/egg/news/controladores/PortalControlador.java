@@ -4,14 +4,11 @@
 package com.egg.news.controladores;
 
 import com.egg.news.entidades.Noticias;
-import com.egg.news.entidades.Usuario;
 import com.egg.news.entidades.UsuarioRol;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
 import com.egg.news.servicios.UsuarioRolServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

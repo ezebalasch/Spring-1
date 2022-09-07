@@ -25,7 +25,5 @@ public interface NoticiasRepositorio extends JpaRepository<Noticias, String> {
     @Query("SELECT n FROM Noticias n WHERE n.titulo = :titulo")
     public Noticias buscarPorTitulo(@Param("titulo") String titulo);
     
-    @Query("SELECT n FROM Noticias n WHERE n.usuario.nombre = :nombre")
-    public  List<Noticias> buscarPorUsuario(@Param("nombre") String nombre);
-    
+
 }

@@ -37,8 +37,8 @@ public class Noticias {
     private Boolean alta;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="usuario", nullable=false)
-    private Usuario usuario;
+    @JoinColumn(name="usuarioRol", nullable=false)
+    private UsuarioRol usuarioRol;
 
     public Noticias() {
     }
@@ -63,8 +63,8 @@ public class Noticias {
         return alta;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public UsuarioRol getUsuarioRol() {
+        return usuarioRol;
     }
 
     public void setId(String id) {
@@ -87,14 +87,16 @@ public class Noticias {
         this.alta = alta;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioRol(UsuarioRol usuarioRol) {
+        this.usuarioRol = usuarioRol;
     }
 
     @Override
     public String toString() {
-        return "Noticias{" + "id=" + id + ", titulo=" + titulo + ", cuerpo=" + cuerpo + ", fecha=" + fecha + ", alta=" + alta + ", usuario=" + usuario + '}';
+        return "Noticias{" + "id=" + id + ", titulo=" + titulo + ", cuerpo=" + cuerpo + ", fecha=" + fecha + ", alta=" + alta + ", usuarioRol=" + usuarioRol + '}';
     }
+
+    
 
    
 

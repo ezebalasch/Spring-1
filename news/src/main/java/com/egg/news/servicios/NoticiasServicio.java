@@ -4,10 +4,10 @@
 package com.egg.news.servicios;
 
 import com.egg.news.entidades.Noticias;
-import com.egg.news.entidades.Usuario;
+import com.egg.news.entidades.UsuarioRol;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.repositorios.NoticiasRepositorio;
-import com.egg.news.repositorios.UsuarioRepositorio;
+import com.egg.news.repositorios.UsuarioRolRepositorio;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,17 +26,17 @@ public class NoticiasServicio {
     @Autowired
     NoticiasRepositorio noticiasRepositorio;
     @Autowired
-    UsuarioRepositorio usuarioRepositorio;
+    UsuarioRolRepositorio usuarioRolRepositorio;
 
     @Transactional
     public void crearNoticias(String titulo, String cuerpo, String idUsuario) throws MiException {
         validar(titulo, cuerpo, idUsuario);
-        Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
+        UsuarioRol usuarioRol = usuarioRolRepositorio.findById(idUsuario).get();
         Noticias noticias = new Noticias();
 
         noticias.setTitulo(titulo);
         noticias.setCuerpo(cuerpo);
-        noticias.setUsuario(usuario);
+        noticias.setUsuarioRol(usuarioRol);
         noticias.setAlta(Boolean.TRUE);
         noticias.setFecha(Calendar.getInstance());
 
@@ -55,16 +55,16 @@ public class NoticiasServicio {
 
         validar(titulo, cuerpo, idUsuario);
         Optional<Noticias> respuesta = noticiasRepositorio.findById(id);
-        Optional<Usuario> respuestaUsuario = usuarioRepositorio.findById(idUsuario);
-        Usuario usuario = new Usuario();
+        Optional<UsuarioRol> respuestaUsuario = usuarioRolRepositorio.findById(idUsuario);
+        UsuarioRol usuarioRol = new UsuarioRol();
         if (respuestaUsuario.isPresent()) {
-            usuario = respuestaUsuario.get();
+            usuarioRol = respuestaUsuario.get();
         }
         if (respuesta.isPresent()) {
             Noticias noticias = respuesta.get();
             noticias.setTitulo(titulo);
             noticias.setCuerpo(cuerpo);
-            noticias.setUsuario(usuario);
+            noticias.setUsuarioRol(usuarioRol);
             noticiasRepositorio.save(noticias);
         }
     }

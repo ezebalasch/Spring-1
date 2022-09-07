@@ -29,19 +29,6 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
-                            Usuarios
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/usuarios/registrar}">Nuevo Usuario</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" th:href="@{/usuarios/lista}">Ver Usuarios</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
                             Perfil
                         </a>
                         <ul class="dropdown-menu">
@@ -52,6 +39,7 @@
                             <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesion</a></li>
                         </ul>
                     </li>
+                    
                     <div  style="   
                           margin-left: auto;
                           margin-right: auto;
@@ -110,7 +98,7 @@
                     <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto; margin-bottom: 5%;">
                         <div class="card-body">
                             <h5 th:text="${noticia.titulo}" class="card-title"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted" th:text="${noticia.usuario.nombre}"></h6>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${noticia.usuarioRol.nombre}"></h6>
                             <p th:text="${noticia.cuerpo}" class="card-text"></p>
 
                         </div>

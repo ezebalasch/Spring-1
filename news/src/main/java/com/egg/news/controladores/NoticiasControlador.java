@@ -4,11 +4,12 @@
 package com.egg.news.controladores;
 
 import com.egg.news.entidades.Noticias;
-import com.egg.news.entidades.Usuario;
+import com.egg.news.entidades.UsuarioRol;
 import com.egg.news.excepciones.MiException;
 import com.egg.news.servicios.NoticiasServicio;
-import com.egg.news.servicios.UsuarioServicio;
+import com.egg.news.servicios.UsuarioRolServicio;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,13 +31,13 @@ public class NoticiasControlador {
     private NoticiasServicio noticiasServicio;
 
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private UsuarioRolServicio usuarioRolServicio;
 
     @GetMapping("/registrar")
-    public String registrar(ModelMap modelo) {
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-
-        modelo.addAttribute("usuarios", usuarios);
+    public String registrar(ModelMap modelo, HttpSession session) {
+        UsuarioRol logueado = (UsuarioRol) session.getAttribute("usuariosession");
+        UsuarioRol usuario = usuarioRolServicio.getOne(logueado.getId());
+        modelo.put("usuario", usuario);
 
         return "noticias_form.html";
     }
@@ -46,6 +47,7 @@ public class NoticiasControlador {
             @RequestParam(required = false) String id_usuario,
             @RequestParam(required = false) String cuerpo, ModelMap modelo) {
         try {
+
             System.out.println(id_usuario);
             noticiasServicio.crearNoticias(titulo, cuerpo, id_usuario);
             modelo.put("éxito", "La noticia fue cargada correctamente");
@@ -53,7 +55,9 @@ public class NoticiasControlador {
             modelo.put("error", ex.getMessage());
             return "noticias_form.html";
         }
-        return "index.html";
+
+        
+        return "noticia_cargada.html";
     }
 
     @GetMapping("/lista")
@@ -66,7 +70,7 @@ public class NoticiasControlador {
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
         modelo.put("noticia", noticiasServicio.getOne(id));
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        List<UsuarioRol> usuarios = usuarioRolServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
         return "noticias_modificar.html";
     }
