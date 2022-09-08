@@ -6,7 +6,7 @@
 
     <body >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/}">EggNews</a>
+            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -14,22 +14,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a th:if="${session.usuariosession == null}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Ingresar
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/login}">Ingresar</a></li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Noticias
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" sec.authorize="hasRole('ADMIN')" th:href="@{/noticias/registrar}">Crear Noticia</a></li>
+                            <li><a class="dropdown-item" th:href="@{/noticias/registrar}">Crear Noticia</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -50,7 +40,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Perfil
                         </a>
@@ -58,18 +48,8 @@
                             <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
-                            </li>                    
+                            </li>
                             <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesion</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a th:if="${session.usuariosession == null}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Registrarse
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/registrar}">Registrarse</a></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -79,19 +59,15 @@
         <div class="container text-center">
             <div style="padding: 2%" class="row justify-content-start">
                 <div class="col-4" >
-                    <a th:if="${session.usuariosession != null}" th:href="@{/admin/dashboard}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                        </svg> Inicio
-                    </a>
-                    <a th:if="${session.usuariosession == null}" th:href="@{/}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <a th:href="@{/admin/dashboard}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                         </svg> Inicio
                     </a>
                 </div>
                 <div class="col-4">
-                    <form th:action="@{/admin/registro}" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/modificar/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                         <div style="border-radius: 2%; background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding: 5%;">
-                            <h1 class="h3 mb-3 fw-normal">Crear cuenta</h1>
+                            <h1 class="h3 mb-3 fw-normal">Editar Perfil</h1>
                             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
                                 <div class="card-body">
                                     <h5 class="card-title">Error</h5>
@@ -104,18 +80,23 @@
                                     <h5 class="card-title">Exito!</h5>
                                     <p class="card-text" th:text="${exito}"></p>
                                 </div>
-                            </div>                            <div class="mb-3">
+                            </div>  
+                            <input hidden th:value="${usuario.id}" name="id">
+                            <div class="mb-3">
                                 <label for="disabledTextInput" class="form-label">Nombre</label>
-                                <input th:value="${nombre}" name="nombre" type="text" id="disabledTextInput" class="form-control" placeholder='Ej "Julian"'>
+                                <input th:value="${usuario.nombre}" name="nombre" type="text" id="disabledTextInput" class="form-control" >
                             </div>
                             <div class="mb-3">
                                 <label for="disabledTextInput" class="form-label">Email</label>
-                                <input th:value="${email}" name="email" type="email" id="disabledTextInput" class="form-control" placeholder='Ej "julian@ejemplo.com"'>
+                                <input th:value="${usuario.email}" name="email" type="email" id="disabledTextInput" class="form-control" placeholder='Ej "julian@ejemplo.com"'>
                             </div>
 
                             <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Foto de Perfil</label>
-                                <input th:value="${archivo}" name="archivo" type="file" id="disabledTextInput" class="form-control" placeholder='Ej "julian@ejemplo.com"'>
+                                <label for="disabledTextInput" class="form-label">Cambiar foto de Perfil</label>
+                                <img style="width: 100%;height: 100%;
+                                     border-radius: 10%"
+                                     class="logo"  th:src="@{/imagen/perfil/__${usuario.id}__}" >
+                                <input th:value="${usuario.imagen}" name="archivo" type="file" id="disabledTextInput" class="form-control" placeholder='Ej "julian@ejemplo.com"'>
                             </div>
 
                             <div class="mb-3">
@@ -126,11 +107,10 @@
                                 <label for="disabledTextInput" class="form-label">Repetir Contraseña</label>
                                 <input th:value="${password2}" name="password2" type="password" id="disabledTextInput" class="form-control">
                             </div>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarme</button>
-
-                        </div>  
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
+                        </div> 
+                    </form>               
                 </div>
-                </form>               
             </div>
 
             <p class="mt-5 mb-3 text-muted">&copy; Ezequiel Balasch</p>

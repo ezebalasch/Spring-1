@@ -69,23 +69,46 @@ public class UsuarioRolServicio implements UserDetailsService {
 
         if (respuesta.isPresent()) {
 
+            UsuarioRol usuarioRol = respuesta.get();
+
+            usuarioRol.setNombre(nombre);
+            usuarioRol.setEmail(email);
+            usuarioRol.setPassword(new BCryptPasswordEncoder().encode(password));
+            usuarioRol.setRol(Rol.USER);
+            String idImagen = null;
+            if (usuarioRol.getImagen() != null) {
+
+                idImagen = usuarioRol.getImagen().getId();
+            }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            usuarioRol.setImagen(imagen);
+            usuarioRolRepositorio.save(usuarioRol);
         }
 
-        UsuarioRol usuarioRol = respuesta.get();
+    }
 
-        usuarioRol.setNombre(nombre);
-        usuarioRol.setEmail(email);
-        usuarioRol.setPassword(new BCryptPasswordEncoder().encode(password));
-        usuarioRol.setRol(Rol.USER);
-        String idImagen = null;
-        if (usuarioRol.getImagen() != null) {
+    public void adminEditar(MultipartFile archivo, String idUsuario, String nombre, String email) throws MiException {
 
-            idImagen = usuarioRol.getImagen().getId();
+
+        Optional<UsuarioRol> respuesta = usuarioRolRepositorio.findById(idUsuario);
+
+        if (respuesta.isPresent()) {
+
+            UsuarioRol usuarioRol = respuesta.get();
+
+            usuarioRol.setNombre(nombre);
+            usuarioRol.setEmail(email);
+            String idImagen = null;
+            if (usuarioRol.getImagen() != null) {
+
+                idImagen = usuarioRol.getImagen().getId();
+            }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            usuarioRol.setImagen(imagen);
+            usuarioRolRepositorio.save(usuarioRol);
         }
-
-        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-        usuarioRol.setImagen(imagen);
-        usuarioRolRepositorio.save(usuarioRol);
 
     }
 
@@ -119,17 +142,17 @@ public class UsuarioRolServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void cambiarRol(String id){
+    public void cambiarRol(String id) {
         Optional<UsuarioRol> respuesta = usuarioRolRepositorio.findById(id);
-        
+
         if (respuesta.isPresent()) {
-            
+
             UsuarioRol usuario = respuesta.get();
-            
+
             if (usuario.getRol().equals(Rol.USER)) {
-                
+
                 usuario.setRol(Rol.ADMIN);
-            }else if (usuario.getRol().equals(Rol.ADMIN)) {
+            } else if (usuario.getRol().equals(Rol.ADMIN)) {
                 usuario.setRol(Rol.USER);
             }
         }
