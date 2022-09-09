@@ -30,9 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
+
     @Autowired
     private ImagenServicio imagenServicio;
-    
+
     @Autowired
     private NoticiasServicio noticiasServicio;
 
@@ -89,20 +90,22 @@ public class AdminControlador {
 
     @PostMapping("/modificar/{id}")
     public String actualizar(@RequestParam MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email,
-             ModelMap modelo) throws MiException{
+            ModelMap modelo) throws MiException {
         
+        UsuarioRol usuario = usuarioRolServicio.getOne(id);
+        modelo.put("usuario", usuario);
+
         try {
             usuarioRolServicio.adminEditar(archivo, id, nombre, email);
             modelo.put("exito", "Usuario actualizado correctamente!");
-            return "panel.html";
+            return "editar_usuario.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
-            
             return "editar_usuario.html";
         }
-        
+
     }
 
 }

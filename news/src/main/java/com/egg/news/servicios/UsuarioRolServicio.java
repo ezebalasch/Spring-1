@@ -90,7 +90,6 @@ public class UsuarioRolServicio implements UserDetailsService {
 
     public void adminEditar(MultipartFile archivo, String idUsuario, String nombre, String email) throws MiException {
 
-
         Optional<UsuarioRol> respuesta = usuarioRolRepositorio.findById(idUsuario);
 
         if (respuesta.isPresent()) {
@@ -104,9 +103,11 @@ public class UsuarioRolServicio implements UserDetailsService {
 
                 idImagen = usuarioRol.getImagen().getId();
             }
+            if (null != archivo && !archivo.isEmpty()) {
+                Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+                usuarioRol.setImagen(imagen);
+            }
 
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-            usuarioRol.setImagen(imagen);
             usuarioRolRepositorio.save(usuarioRol);
         }
 

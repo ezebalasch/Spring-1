@@ -6,7 +6,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
+            <a class="navbar-brand" th:href="@{/inicio}" style="margin-left: 1%; ">EggNews</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -89,8 +89,14 @@
             </a>
         </div>
         <div
-            style="   background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding-top: 2%;">
-            <h1 style="text-align:center ;">Encontrá el listado de todas las noticias aquí</h1>
+            style="   background-color: rgb(230, 228, 227); border-color: 
+            rgb(230, 228, 227); border-width: 1px;border-style: solid;
+            padding-top: 2%;">
+            <h1 th:if="${session.usuariosession != null}" 
+                th:text="'Hola de vuelta ' + ${session.usuariosession.nombre} + '!'"
+                style="text-align:center ;">                
+            </h1>
+
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58 1440 250">

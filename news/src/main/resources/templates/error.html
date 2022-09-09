@@ -13,7 +13,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
+            <a class="navbar-brand" th:href="@{/inicio}" style="margin-left: 1%; ">EggNews</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -82,8 +82,8 @@
         <div style="   background-color: rgb(230, 228, 227); border-color: 
              rgb(230, 228, 227); border-width: 1px;border-style: solid;
              padding-top: 2%;">
-            <a th:text="'Error ' + ${codigo}">EGG NEWS</a>
-            <p th:text="${mensaje}"></p>
+            <h3 th:text="'Error ' + ${codigo}">EGG NEWS</h3>
+            <h1 th:text="${mensaje}"></h1>
 
 
         </div>

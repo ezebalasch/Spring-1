@@ -6,7 +6,7 @@
 
     <body >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
+            <a class="navbar-brand" th:href="@{/inicio}" style="margin-left: 1%; ">EggNews</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,13 +59,13 @@
         <div class="container text-center">
             <div style="padding: 2%" class="row justify-content-start">
                 <div class="col-4" >
-                    <a th:href="@{/admin/dashboard}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <a th:href="@{/admin/usuarios}"  class="btn" style="background:rgb(230, 228, 227)">                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                        </svg> Inicio
+                        </svg> Volver
                     </a>
                 </div>
                 <div class="col-4">
-                    <form th:action="@{/modificar/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/admin/modificar/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
                         <div style="border-radius: 2%; background-color: rgb(230, 228, 227); border-color: rgb(230, 228, 227); border-width: 1px;border-style: solid; padding: 5%;">
                             <h1 class="h3 mb-3 fw-normal">Editar Perfil</h1>
                             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
@@ -96,17 +96,9 @@
                                 <img style="width: 100%;height: 100%;
                                      border-radius: 10%"
                                      class="logo"  th:src="@{/imagen/perfil/__${usuario.id}__}" >
-                                <input th:value="${usuario.imagen}" name="archivo" type="file" id="disabledTextInput" class="form-control" placeholder='Ej "julian@ejemplo.com"'>
+                                <input th:value="${usuario.imagen}" name="archivo" type="file" id="disabledTextInput" class="form-control">
                             </div>
-
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Contraseña</label>
-                                <input th:value="${password}" name="password" type="password" id="disabledTextInput" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Repetir Contraseña</label>
-                                <input th:value="${password2}" name="password2" type="password" id="disabledTextInput" class="form-control">
-                            </div>
+                            
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
                         </div> 
                     </form>               
