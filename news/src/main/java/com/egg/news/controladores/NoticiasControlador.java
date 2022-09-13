@@ -11,6 +11,7 @@ import com.egg.news.servicios.UsuarioRolServicio;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,6 @@ public class NoticiasControlador {
             return "noticias_form.html";
         }
 
-        
         return "noticia_cargada.html";
     }
 
