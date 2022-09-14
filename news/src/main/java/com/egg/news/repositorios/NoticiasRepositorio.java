@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NoticiasRepositorio extends JpaRepository<Noticias, String> {
-    @Query("SELECT n FROM Noticias n WHERE n.alta = false")
+    @Query("SELECT n FROM Noticias n WHERE n.alta = 1")
     List<Noticias> getAllNews();
 
     @Query("SELECT n FROM Noticias n WHERE n.id = :id")

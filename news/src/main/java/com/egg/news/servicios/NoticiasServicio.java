@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +43,10 @@ public class NoticiasServicio {
         noticiasRepositorio.save(noticias);
     }
 
+    @Transactional(readOnly = true)
     public List<Noticias> listarNoticias() {
         List<Noticias> noticias = new ArrayList();
-        noticias = noticiasRepositorio.findAll();
+        noticias = noticiasRepositorio.getAllNews();
 
         return noticias;
     }
@@ -69,8 +70,35 @@ public class NoticiasServicio {
         }
     }
 
+    @Transactional(readOnly = true)
+    public Noticias getNewsById(String id) throws MiException {
+        validarId(id);
+        Optional<Noticias> optNews = noticiasRepositorio.findById(id);
+        if (!optNews.isPresent()) {
+            throw new MiException("No se encontraron noticias");
+        }
+        return optNews.get();
+    }
+
+    @Transactional
+    public void eliminarNoticia(String id) throws MiException {
+        Noticias noticia = getNewsById(id);
+        
+        noticia.setAlta(Boolean.FALSE);
+        System.out.println("falso");
+        noticiasRepositorio.save(noticia);
+    }
+
     public Noticias getOne(String id) {
         return noticiasRepositorio.getOne(id);
+
+    }
+
+    private void validarId(String id) throws MiException {
+
+        if (id.isEmpty() || id == null) {
+            throw new MiException("El ID está vacío");
+        }
 
     }
 

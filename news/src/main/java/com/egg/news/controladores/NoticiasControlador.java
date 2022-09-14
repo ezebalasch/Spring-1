@@ -87,4 +87,20 @@ public class NoticiasControlador {
         }
 
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) {
+        List<Noticias> noticias = noticiasServicio.listarNoticias();
+        modelo.addAttribute("noticias", noticias);
+        try {
+            System.out.println("Todavia no entra");
+            noticiasServicio.eliminarNoticia(id);
+            System.out.println("entro");
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+        } finally {
+            return "redirect:/noticias/lista";
+        }
+    }
 }
