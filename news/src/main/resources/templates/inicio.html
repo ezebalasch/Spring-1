@@ -6,7 +6,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/inicio}">EggNews</a>
+            <a class="navbar-brand" th:href="@{/inicio}" style="margin-left: 1%; ">EggNews</a>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,9 +41,17 @@
                     </ul>
                 </li>
 
-                <div class="fotoPerfil">
+                <div style="    margin-left: auto;
+                     margin-right: auto;
+                     position: absolute;
+                     right: 20px;
+                     top: 50px;
+                     height: 200px;
+                     width: 200px;">
                     <a th:if="${session.usuariosession.imagen != null}" class="d-flex align-items-center">
-                        <img class="imgprf"
+                        <img style="    width: 100%;
+                             height: 100%;
+                             clip-path: circle(45px at 100px 65px);"
                              th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" >
                     </a>
                 </div> 
@@ -53,8 +61,11 @@
     </nav>
 
 
-        <div class="Bienvenida">
-        <h1 th:if="${session.usuariosession != null}" 
+    <div style="    background-color: rgb(230, 228, 227);
+         border-color: rgb(230, 228, 227);
+         border-width: 1px;border-style: solid;
+         padding-top: 2%;">
+        <h1 style="text-align:center;" th:if="${session.usuariosession != null}" 
             th:text="'Hola de vuelta ' + ${session.usuariosession.nombre} + '!'">                
         </h1>
     </div>
@@ -68,7 +79,8 @@
 
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="20000">
-                <div class="Desliza">
+                <div style="    width: 18rem;margin-left: auto;
+                     margin-right: auto;">
 
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#FA4D56"
