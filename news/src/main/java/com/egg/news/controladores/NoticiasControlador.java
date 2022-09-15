@@ -94,9 +94,7 @@ public class NoticiasControlador {
         List<Noticias> noticias = noticiasServicio.listarNoticias();
         modelo.addAttribute("noticias", noticias);
         try {
-            System.out.println("Todavia no entra");
             noticiasServicio.eliminarNoticia(id);
-            System.out.println("entro");
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
         } finally {

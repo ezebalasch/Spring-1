@@ -1,0 +1,82 @@
+
+/*INDEX*/
+
+#divIndex{
+    background-color: rgb(230, 228, 227);
+    border-color: rgb(230, 228, 227);
+    border-width: 1px;
+    border-style: solid;
+    padding-top: 2%;
+}
+h1{
+    text-align:center ;
+}
+#botonIngreso{
+    margin-top: -2%;
+    margin-left: 20%;
+    width: 250px;
+    height: 250px;
+    border-radius: 10% 100% 10% 89% / 10% 89% 10% 89% ;
+}
+#botonRegistro{
+    margin-top: -2%;
+    margin-left: 20%;
+    width: 250px;
+    height: 250px; 
+    border-radius: 90% 10% 90% 11% / 90% 11% 90% 11% ;
+}
+/*CAMBIAR A TODOS LOS HTML*/
+.navbar-brand{
+    margin-left: 1%;
+}
+#contenedor1{
+    padding: 2%; 
+}
+
+#botonInicio{
+    background:rgb(230, 228, 227);
+}
+.fotoPerfil{
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    height: 200px;
+    width: 200px;
+}
+.imgprf{
+    width: 100%;
+    height: 100%;
+    clip-path: circle(45px at 100px 65px);
+}
+.Bienvenida{
+    background-color: rgb(230, 228, 227);
+    border-color: rgb(230, 228, 227);
+    border-width: 1px;border-style: solid;
+    padding-top: 2%;
+}
+.Desliza{
+    width: 18rem;margin-left: auto;
+    margin-right: auto;
+}
+#carta{
+    width: 18rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+/*LOGIN*/
+.loginForm{
+    border-radius: 2%;
+    background-color: rgb(230, 228, 227);
+    border-color: rgb(230, 228, 227); 
+    border-width: 1px;border-style: solid; 
+    padding: 5%;
+}
+/*INICIO*/
+/*EDITAR USUARIO (No se pueden realizar cambios css)*/
+/*ERROR ---*/
+/*NOTICIA CARGADA ---*/
+/*REGISTRO ---*/
+

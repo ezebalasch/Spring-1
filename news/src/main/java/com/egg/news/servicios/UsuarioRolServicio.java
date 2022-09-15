@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -133,6 +133,13 @@ public class UsuarioRolServicio implements UserDetailsService {
 
     }
 
+    private void validarId(String id) throws MiException {
+
+        if (id.isEmpty() || id == null) {
+            throw new MiException("El Id no se encuentra");
+        }
+    }
+
     public List<UsuarioRol> listarUsuarios() {
 
         List<UsuarioRol> usuarios = new ArrayList();
@@ -145,18 +152,34 @@ public class UsuarioRolServicio implements UserDetailsService {
     @Transactional
     public void cambiarRol(String id) {
         Optional<UsuarioRol> respuesta = usuarioRolRepositorio.findById(id);
-
         if (respuesta.isPresent()) {
-
             UsuarioRol usuario = respuesta.get();
 
             if (usuario.getRol().equals(Rol.USER)) {
-
                 usuario.setRol(Rol.ADMIN);
+
             } else if (usuario.getRol().equals(Rol.ADMIN)) {
                 usuario.setRol(Rol.USER);
             }
+            usuarioRolRepositorio.save(usuario);
+
         }
+    }
+
+    @Transactional(readOnly = true)
+    public UsuarioRol getUserById(String id) throws MiException {
+        validarId(id);
+        Optional<UsuarioRol> user = usuarioRolRepositorio.findById(id);
+        if (!user.isPresent()) {
+            throw new MiException("No se encontraron usuarios");
+        }
+        return user.get();
+    }
+
+    @Transactional
+    public void eliminarUsuario(String id) throws MiException {
+        UsuarioRol user = getUserById(id);
+        usuarioRolRepositorio.delete(user);
     }
 
     @Override

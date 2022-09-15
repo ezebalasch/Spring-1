@@ -85,7 +85,6 @@ public class NoticiasServicio {
         Noticias noticia = getNewsById(id);
         
         noticia.setAlta(Boolean.FALSE);
-        System.out.println("falso");
         noticiasRepositorio.save(noticia);
     }
 

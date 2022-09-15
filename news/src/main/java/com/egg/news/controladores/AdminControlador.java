@@ -3,7 +3,6 @@
  */
 package com.egg.news.controladores;
 
-import com.egg.news.entidades.Imagen;
 import com.egg.news.entidades.Noticias;
 import com.egg.news.entidades.UsuarioRol;
 import com.egg.news.excepciones.MiException;
@@ -11,9 +10,8 @@ import com.egg.news.servicios.ImagenServicio;
 import com.egg.news.servicios.NoticiasServicio;
 import com.egg.news.servicios.UsuarioRolServicio;
 import java.util.List;
-import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,7 +89,7 @@ public class AdminControlador {
     @PostMapping("/modificar/{id}")
     public String actualizar(@RequestParam MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email,
             ModelMap modelo) throws MiException {
-        
+
         UsuarioRol usuario = usuarioRolServicio.getOne(id);
         modelo.put("usuario", usuario);
 
@@ -105,6 +103,18 @@ public class AdminControlador {
             modelo.put("email", email);
             return "editar_usuario.html";
         }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) {
+        try {
+            usuarioRolServicio.eliminarUsuario(id);
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "redirect:/admin";
+        }
+        return "redirect:/admin/usuarios";
 
     }
 
